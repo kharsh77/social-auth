@@ -26,7 +26,6 @@ Apis
 ```````
 
 * CreateUser
-``````````````
 	POST /user
 
 	{
@@ -39,19 +38,15 @@ Apis
 	}
 
 * GetUser
-````````````
 	GET /user/<user_id>
 
 * ListUsers
-````````````
 	GET /user/all
 
 * SearchUsers (Search user based on phone number)
-``````````````````````````````````````````````````
 	GET /user/<query_string>
 
 * ResetPassword
-````````````````
 	PUT /user/setpassword/<user_id>
 
 	{
@@ -60,7 +55,6 @@ Apis
 	}
 
 * Login
-````````
 	GET /login
 
 	{
@@ -69,7 +63,6 @@ Apis
 	}
 
 * Logout
-`````````
 	GET /logout
 
 	{
