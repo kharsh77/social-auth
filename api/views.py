@@ -160,13 +160,16 @@ def login(request):
 
 	phone_number = getReqParam(parsedReq, 'phoneNumber')
 	password = getReqParam(parsedReq, "password")
+	try:
+		m = User.objects.get(phone_number=phone_number)
+	except User.DoesNotExist:
+		return JsonResponse({"message":"No user with this phonenumber"}, status=400)
 
-	m = User.objects.get(phone_number=phone_number)
 	if matchPasword(m.password, password):
 		request.session['user_id'] = str(m.id)
-		return HttpResponse("You're logged in.")
+		return JsonResponse({"message":"You're logged in"}, status=200)
 	else:
-		return HttpResponse("Your username and password didn't match.")
+		return JsonResponse({"message":"Password didn't match"}, status=400)
 
 
 @require_http_methods(["POST"])
@@ -179,7 +182,7 @@ def logout(request):
 		if s.get_decoded().get('user_id') == user_id:
 			s.delete()
 
-	return HttpResponse("You're logged out.")
+	return JsonResponse({"message":"You're logged out"}, status=200)
 
 
 
